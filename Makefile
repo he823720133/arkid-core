@@ -76,3 +76,11 @@ sqlset:
 
 run:
 	python manage.py runserver 0:8000
+
+SRC=$(shell ls -A | grep -v 'tmp-builder')
+django-plugin:
+	-rm -rf tmp-builder
+	mkdir -p tmp-builder/arkid
+	cp -R $(SRC) tmp-builder/arkid/
+	cd tmp-builder/arkid && cp setup.py setup.cfg MANIFEST.in README.md LICENSE.md ..
+	# cd tmp-builder && python setup.py sdist
